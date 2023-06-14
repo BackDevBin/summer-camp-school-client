@@ -100,8 +100,8 @@ const Login = () => {
                         <h3 className='p-3'>Or</h3>
                         <button onClick={loginGoogle} type='button' className="btn btn-outline  normal-case"><FaGoogle></FaGoogle> Google</button>
                     </div>
-                    <div className='text-sm '>
-                        <span>New Customer?</span>
+                    <div className='text-xs'>
+                        <span>New to RoseValley?</span>
                         <span className="underline"> <Link to='/register'>Create Account</Link></span>
                     </div>
                 </form>
