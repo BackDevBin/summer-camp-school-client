@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import webLogo from '../../../assets/weblogo.jpg'
+import webLogo from '../../../assets/weblogo.png'
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 
@@ -18,20 +18,6 @@ const Navbar = () => {   //Home, Instructors, Classes, Dashboard
 
     return (
         <div>
-            <div className='bg-base-200 border-b border-gray-500 flex items-center p-4 justify-between'>
-            <Link to="/"><img className='w-24 md:mx-5' src={webLogo} alt="" /></Link>
-            <div className='flex items-center'>
-            {
-                    user ? <>
-                        <div className="tooltip tooltip-bottom tooltip-secondary" data-tip={user?.displayName}>
-                        <img className='rounded-full w-12 mx-2' src={user?.photoURL} alt="" />
-                        </div>
-                        <button onClick={handleLogOut} className="btn btn-outline btn-secondary normal-case md:me-5">Logout</button>
-                        
-                    </> : <Link to="/login"><button className="btn btn-outline btn-secondary normal-case md:me-5">Login</button></Link>
-                }
-            </div>
-            </div>
             <div className="navbar bg-base-200">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -44,7 +30,7 @@ const Navbar = () => {   //Home, Instructors, Classes, Dashboard
                             <li><Link> Dashboard</Link> </li>
                         </ul>
                     </div>
-                   
+                    <Link to="/"><img className='w-20 md:mx-5' src={webLogo} alt="" /></Link>
 
                 </div>
                 <div className="navbar-center hidden lg:flex">
@@ -52,13 +38,25 @@ const Navbar = () => {   //Home, Instructors, Classes, Dashboard
                         <li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/">Home</Link> </li>
                         <li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/instructors"> Instructors</Link> </li>
                         {
-                        user ? <><li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/dashboard"> Dashboard </Link> </li></> : <></>
+                            user ? <><li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/dashboard"> Dashboard </Link> </li></> : <></>
                         }
                         <li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/classes"> Classes</Link> </li>
                     </ul>
                 </div>
                 <div className="navbar-end">
-                   
+
+                <div className='flex items-center'>
+                    {
+                        user ? <>
+                            <div className="tooltip tooltip-bottom tooltip-secondary" data-tip={user?.displayName}>
+                                <img className='rounded-full w-12 mx-2' src={user?.photoURL} alt="" />
+                            </div>
+                            <button onClick={handleLogOut} className="btn btn-outline btn-secondary normal-case md:me-5">Logout</button>
+
+                        </> : <Link to="/login"><button className="btn btn-outline btn-secondary normal-case md:me-5">Login</button></Link>
+                    }
+                </div>
+
                 </div>
             </div>
         </div>

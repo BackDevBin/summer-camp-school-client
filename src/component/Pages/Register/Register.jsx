@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Register = () => {
     const [show, setShow] = useState(false);
@@ -21,39 +22,49 @@ const Register = () => {
         const pass = form.password.value;
         const name = form.name.value;
         const photo = form.image.value;
+        const ConformPass = form.conform.value;
 
 
-        createUser(email, pass)
-            .then(result => {
-                const logUser = result.user;
-                form.reset();
+        if (pass === ConformPass) {
+            createUser(email, pass)
+                .then(result => {
+                    const logUser = result.user;
+                    form.reset();
 
 
-                userUpdateData(logUser, name, photo)
-                    .then(() => {
+                    userUpdateData(logUser, name, photo)
+                        .then(() => {
 
-                    }).catch((error) => {
-                        console.log(error);
-                    });
+                        }).catch((error) => {
+                            console.log(error);
+                        });
 
-                logOut();
+                    logOut();
 
-                Swal.fire({
-                    title: 'Congratulations!!! Your account has been successfully created',
-                    text: 'Do you want to continue',
-                    icon: 'success',
-                    confirmButtonText: 'Continue'
+                    Swal.fire({
+                        title: 'Congratulations!!! Your account has been successfully created',
+                        text: 'Do you want to continue',
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    })
                 })
-            })
-            .catch(error => {
+                .catch(error => {
 
-                Swal.fire({
-                    title: 'Opps !!! Registration Unsuccessful',
-                    text: `${error.message}`,
-                    icon: 'error',
-                    confirmButtonText: 'Continue'
+                    Swal.fire({
+                        title: 'Opps !!! Registration Unsuccessful',
+                        text: `${error.message}`,
+                        icon: 'error',
+                        confirmButtonText: 'Continue'
+                    })
                 })
+        } else {
+            Swal.fire({
+                title: 'Password Dose not match!!!',
+                text: 'Check again',
+                icon: 'error',
+                confirmButtonText: 'Continue'
             })
+        }
 
     }
 
@@ -70,15 +81,19 @@ const Register = () => {
                     <input type="text" placeholder="Full Name" name='name' className="input input-bordered  block w-full  " />
                     <input type="email" placeholder="Your Email" name='email' className="input input-bordered  block w-full  " required />
                     <input type="text" placeholder="Photo Url" name='image' className="input input-bordered  block w-full  " required />
+
+                    <input type={show ? "text" : "password"} placeholder="Password" name='password' className="input input-bordered  block w-full " required />
+
+
                     <div>
-                        <input type={show ? "text" : "password"} placeholder="Password" name='password' className="input input-bordered  block w-full " required />
-                        <p onClick={() => setShow(!show)} className='text-start text-sm text-stone-500'><small>
+                        <input type={show ? "text" : "password"} placeholder="Conform Password" name='conform' className="input input-bordered  block w-full " required />
+                        <p onClick={() => setShow(!show)} className='text-start text-sm'><small>
                             {
-                                show ? <span className="link link-hover">Hide Password</span> : <span className="link link-hover">Show Password</span>
+                                show ? <span className="link link-hover"><FaEyeSlash className='inline'></FaEyeSlash> Hide Password</span> : <span className="link link-hover"><FaEye className='inline'></FaEye> Show Password</span>
                             }
                         </small></p>
-
                     </div>
+
                     <div className='flex mx-auto space-x-3 md:w-72'>
                         <button className="btn btn-outline w-full normal-case">Create</button>
                     </div>

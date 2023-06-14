@@ -3,7 +3,7 @@ import fb from '../../../assets/fb.png'
 import twitter from '../../../assets/tw.png'
 import instagram from '../../../assets/insta.png'
 import pin from '../../../assets/pinta.png'
-import webLogo from '../../../assets/weblogo.jpg'
+import webLogo from '../../../assets/weblogo.png'
 import { Link } from 'react-router-dom';
 import { FaInbox, FaLocationArrow, FaPhone } from "react-icons/fa";
 

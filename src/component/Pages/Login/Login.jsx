@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { FaGoogle } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
@@ -88,11 +88,12 @@ const Login = () => {
                     <input type="email" placeholder="Email" name='email' className="input input-bordered input-accent  block w-full max-w-xs " required />
                     <div>
                         <input type={show ? "text" : "password"} placeholder="Password" name='password' className="input input-bordered input-accent block w-full max-w-xs" required />
-                        <p onClick={() => setShow(!show)} className='text-start text-sm text-stone-500'><small>
+                        <p onClick={() => setShow(!show)} className='text-start text-sm'><small>
                             {
-                                show ? <span className="link link-hover">Hide Password</span> : <span className="link link-hover">Show Password</span>
+                                show ? <span className="link link-hover"><FaEyeSlash className='inline'></FaEyeSlash> Hide Password</span> : <span className="link link-hover"><FaEye className='inline'></FaEye> Show Password</span>
                             }
                         </small></p>
+                        
 
                     </div>
                     <div className='flex mx-auto space-x-3 w-60'>
