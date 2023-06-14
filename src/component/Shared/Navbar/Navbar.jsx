@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import webLogo from '../../../assets/weblogo.jpg'
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 
 const Navbar = () => {   //Home, Instructors, Classes, Dashboard 
 
-    // const { logOut, user } = useContext(AuthContext);
+    const { logOut, user } = useContext(AuthContext);
 
-    // const handleLogOut = () => {
-    //     logOut()
-    //         .then(() => { console.log("out") })
-    //         .catch((error) => console.log(error))
-    // }
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { console.log("out") })
+            .catch((error) => console.log(error))
+    }
 
 
 
@@ -19,7 +20,17 @@ const Navbar = () => {   //Home, Instructors, Classes, Dashboard
         <div>
             <div className='bg-base-200 border-b border-gray-500 flex items-center p-4 justify-between'>
             <Link to="/"><img className='w-24 md:mx-5' src={webLogo} alt="" /></Link>
-            <Link to="/login"><button className="btn btn-outline normal-case">Login</button></Link>
+            <div className='flex items-center'>
+            {
+                    user ? <>
+                        <div className="tooltip tooltip-bottom tooltip-secondary" data-tip={user?.displayName}>
+                        <img className='rounded-full w-12 mx-2' src={user?.photoURL} alt="" />
+                        </div>
+                        <button onClick={handleLogOut} className="btn btn-outline btn-secondary normal-case md:me-5">Logout</button>
+                        
+                    </> : <Link to="/login"><button className="btn btn-outline btn-secondary normal-case md:me-5">Login</button></Link>
+                }
+            </div>
             </div>
             <div className="navbar bg-base-200">
                 <div className="navbar-start">
@@ -40,22 +51,14 @@ const Navbar = () => {   //Home, Instructors, Classes, Dashboard
                     <ul className="menu menu-horizontal px-1 font-semibold">
                         <li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/">Home</Link> </li>
                         <li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/instructors"> Instructors</Link> </li>
-                        {/* {
-                        user ? <><li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/mytoy"> Dashboard </Link> </li> : <></>
-                    } */}
+                        {
+                        user ? <><li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/dashboard"> Dashboard </Link> </li></> : <></>
+                        }
                         <li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/classes"> Classes</Link> </li>
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {/* {
-                    user ? <>
-                        <div className="tooltip tooltip-bottom tooltip-secondary" data-tip={user?.displayName}>
-                        <img className='rounded-full w-12 mx-2' src={user?.photoURL} alt="" />
-                        </div>
-                        <button onClick={handleLogOut} className="btn btn-outline btn-secondary normal-case md:me-5">Logout</button>
-                        
-                    </> : <Link to="/login"><button className="btn btn-outline btn-secondary normal-case md:me-5">Login</button></Link>
-                } */}
+                   
                 </div>
             </div>
         </div>

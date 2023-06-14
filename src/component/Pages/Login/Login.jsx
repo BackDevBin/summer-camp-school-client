@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
-// import { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-// import { AuthContext } from '../../AuthProvider/AuthProvider';
-// import useTitle from '../../../CustomHooks/useTitle';
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const Login = () => {
     const [show, setShow] = useState(false);
     
 
-    // const {GoogleLogin,createLogin} = useContext(AuthContext);
+    const {GoogleLogin,createLogin} = useContext(AuthContext);
 
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    // let location = useLocation();
+    let location = useLocation();
 
-    // const from = location.state?.from?.pathname || '/';
+    const from = location.state?.from?.pathname || '/';
 
     // useTitle("Login");
 
@@ -30,54 +28,54 @@ const Login = () => {
 
         
 
-    //     createLogin(email, pass)
-    //     .then(result =>{
-    //         const logUser = result.user;
-    //         form.reset();
-    //         navigate(from);
+        createLogin(email, pass)
+        .then(result =>{
+            const logUser = result.user;
+            form.reset();
+            navigate(from);
 
-    //         Swal.fire({
-    //             title: 'Login successful !!!',
-    //             text: 'Do you want to continue',
-    //             icon: 'success',
-    //             confirmButtonText: 'Continue'
-    //           })
-    //     })
-    //     .catch(error =>{
-    //         Swal.fire({
-    //             title: 'Opps !!! Login Unsuccessful',
-    //             text: `${error.message}`,
-    //             icon: 'error',
-    //             confirmButtonText: 'Continue'
-    //           })
-    //     })
+            Swal.fire({
+                title: 'Login successful !!!',
+                text: 'Do you want to continue',
+                icon: 'success',
+                confirmButtonText: 'Continue'
+              })
+        })
+        .catch(error =>{
+            Swal.fire({
+                title: 'Opps !!! Login Unsuccessful',
+                text: `${error.message}`,
+                icon: 'error',
+                confirmButtonText: 'Continue'
+              })
+        })
         
      }
 
      const loginGoogle = () =>{
         
-    //     GoogleLogin()
-    //     .then(result =>{
-    //         const logUser = result.user;
-    //         navigate(from);
+        GoogleLogin()
+        .then(result =>{
+            const logUser = result.user;
+            navigate(from);
 
-    //         Swal.fire({
-    //             title: 'Login successful !!!',
-    //             text: 'Do you want to continue',
-    //             icon: 'success',
-    //             confirmButtonText: 'Continue'
-    //           })
-    //     })
-    //     .catch(error =>{
+            Swal.fire({
+                title: 'Login successful !!!',
+                text: 'Do you want to continue',
+                icon: 'success',
+                confirmButtonText: 'Continue'
+              })
+        })
+        .catch(error =>{
             
-    //         Swal.fire({
-    //             title: 'Opps !!! Login Unsuccessful',
-    //             text: `${error.message}`,
-    //             icon: 'error',
-    //             confirmButtonText: 'Continue'
-    //           })
+            Swal.fire({
+                title: 'Opps !!! Login Unsuccessful',
+                text: `${error.message}`,
+                icon: 'error',
+                confirmButtonText: 'Continue'
+              })
             
-    //     })
+        })
     }
     
 
