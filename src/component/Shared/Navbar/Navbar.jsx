@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import webLogo from '../../../assets/weblogo.jpg'
-import instagram from '../../../assets/insta.png'
 
 
 const Navbar = () => {   //Home, Instructors, Classes, Dashboard 
@@ -20,7 +19,7 @@ const Navbar = () => {   //Home, Instructors, Classes, Dashboard
         <div>
             <div className='bg-base-200 border-b border-gray-500 flex items-center p-4 justify-between'>
             <Link to="/"><img className='w-24 md:mx-5' src={webLogo} alt="" /></Link>
-            <img className='rounded-full w-12 mx-2' src={instagram} alt="" />
+            <Link to="/login"><button className="btn btn-outline normal-case">Login</button></Link>
             </div>
             <div className="navbar bg-base-200">
                 <div className="navbar-start">
