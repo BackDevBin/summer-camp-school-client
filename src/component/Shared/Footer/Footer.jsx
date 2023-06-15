@@ -15,7 +15,7 @@ const Footer = () => {
             <footer className="footer justify-between p-10 md:pe-28 bg-base-200 text-base-content">
                 <div>
                     <img src={webLogo} className='w-36' alt="" />
-                    <p className='md:w-96'>Our camp provides outstanding education and has been delivering a wide range of A-Level, higher and further education courses, while also promoting UK cultural such as our Summer and Winter Courses etc</p>
+                    <p className='md:w-96 w-80'>Our camp provides outstanding education and has been delivering a wide range of A-Level, higher and further education courses, while also promoting UK cultural such as our Summer and Winter Courses etc</p>
                 </div>
 
                 <div className='w-full '>
