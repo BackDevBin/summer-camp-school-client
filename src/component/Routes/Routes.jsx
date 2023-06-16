@@ -28,12 +28,12 @@ export const router = createBrowserRouter([
         {
           path: "/classes",
           element: <ClassesPage></ClassesPage>,
-          loader: () => fetch("http://localhost:5000/classes")
+          loader: () => fetch("https://summer-camp-server-rho-woad.vercel.app/classes")
         },
         {
           path: "/instructors",
           element: <Instructors></Instructors>,
-          loader: () => fetch("http://localhost:5000/classes")
+          loader: () => fetch("https://summer-camp-server-rho-woad.vercel.app/classes")
         },
       ],
     },
