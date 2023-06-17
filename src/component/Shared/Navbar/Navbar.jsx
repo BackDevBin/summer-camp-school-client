@@ -38,7 +38,7 @@ const Navbar = () => {   //Home, Instructors, Classes, Dashboard
                         <li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/">Home</Link> </li>
                         <li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/instructors"> Instructors</Link> </li>
                         {
-                            user ? <><li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/dashboard"> Dashboard </Link> </li></> : <></>
+                            user ? <><li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/dashboard/myclass"> Dashboard </Link> </li></> : <></>
                         }
                         <li className='hover:bg-pink-500 rounded-md hover:text-slate-100'><Link to="/classes"> Classes</Link> </li>
                     </ul>
