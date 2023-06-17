@@ -2,10 +2,30 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../../../AuthProvider/AuthProvider';
 import useUsers from '../../../../hook/useUsers';
 import SectionTitle from '../../../Shared/SectionTitle/SectionTitle';
+import Swal from 'sweetalert2';
 
 const ManageUser = () => {
 
     const [regUsers,refetch] = useUsers();
+
+    const makeAdmin = id =>{
+       fetch(`http://localhost:5000/users/admin/${id}`,{
+        method: 'PATCH'
+       })
+       .then(res => res.json())
+       .then(data =>{
+        console.log(data);
+        if(data.modifiedCount){
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Admin Updated',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+       })
+    }
 
     return (
         <div>
@@ -45,7 +65,7 @@ const ManageUser = () => {
                                     </td>
                                     <th>
                                         <button className="btn btn-ghost btn-xs normal-case bg-slate-50 text-black m-1">Instructors</button>
-                                        <button className="btn btn-ghost btn-xs normal-case bg-red-700 text-white m-1">Admin</button>
+                                        <button onClick={()=>makeAdmin(item._id)} className="btn btn-ghost btn-xs normal-case bg-red-700 text-white m-1">Admin</button>
                                     </th>
                                 </tr>)
                             }

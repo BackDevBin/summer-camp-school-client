@@ -1,9 +1,32 @@
+import { useContext, useEffect, useState } from "react";
 import { FaHome, FaLayerGroup, FaWallet } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import useUsers from "../../../hook/useUsers";
 
 const Dashboard = () => {
 
-    const admin = false;
+    const {user} =useContext(AuthContext);
+    const [regUsers] = useUsers();
+
+    const [admin, setAdmin]=useState(false);
+
+    console.log(user.email);
+
+    useEffect(() => {
+        const adminFind = regUsers.find(item=>{
+            console.log(item.email);
+            if(item.email === user.email){
+                
+                setAdmin(true);
+            }
+        });
+      },[]);
+
+    
+
+    
+
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
