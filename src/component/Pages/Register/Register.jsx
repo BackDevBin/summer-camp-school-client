@@ -17,10 +17,10 @@ const Register = () => {
         handleSubmit,
         watch,
         formState: { errors },
-      } = useForm()
+    } = useForm()
 
 
-      const onSubmit = (data) => {
+    const onSubmit = (data) => {
         const email = data.email;
         const pass = data.password;
         const name = data.name;
@@ -32,22 +32,35 @@ const Register = () => {
             createUser(email, pass)
                 .then(result => {
                     const logUser = result.user;
-                    
+
                     userUpdateData(logUser, name, photo)
                         .then(() => {
+
+                            const saveUsers = {name,email}
+
+                            fetch('https://summer-camp-server-rho-woad.vercel.app/users', {
+                                method: 'POST',
+                                headers: {
+                                    'content-type': 'application/json'
+                                },
+                                body: JSON.stringify(saveUsers)
+                            }).then(res => res.json())
+                                .then(data => {
+                                    if (data.insertedId) {
+                                        Swal.fire({
+                                            title: 'Congratulations!!! Your account has been successfully created',
+                                            text: 'Do you want to continue',
+                                            icon: 'success',
+                                            confirmButtonText: 'Continue'
+                                        })
+                                    }
+                                })
 
                         }).catch((error) => {
                             console.log(error);
                         });
 
                     logOut();
-
-                    Swal.fire({
-                        title: 'Congratulations!!! Your account has been successfully created',
-                        text: 'Do you want to continue',
-                        icon: 'success',
-                        confirmButtonText: 'Continue'
-                    })
                 })
                 .catch(error => {
 
@@ -69,7 +82,7 @@ const Register = () => {
     }
 
 
-  
+
 
 
     return (
@@ -83,10 +96,10 @@ const Register = () => {
                     <input type="text" placeholder="Photo Url" name='image' {...register("image")} className="input input-bordered  block w-full  " required />
 
                     <input type={show ? "text" : "password"} placeholder="Password" name='password' {...register("password",
-                    {
-                        minLength: 6,
-                        pattern: /^(?=.*[A-Z])(?=.*[@#$%^&+=]).+$/
-                    })} className="input input-bordered  block w-full " required />
+                        {
+                            minLength: 6,
+                            pattern: /^(?=.*[A-Z])(?=.*[@#$%^&+=]).+$/
+                        })} className="input input-bordered  block w-full " required />
 
                     {errors.password?.type === 'minLength' && <p className='text-red-600 text-start text-xs m-0 p-1'>Password must be 6 character</p>}
                     {errors.password?.type === 'pattern' && <p className='text-red-600 text-start text-xs p-0'>Password must have at least one Upper case & Special characters & Digit</p>}

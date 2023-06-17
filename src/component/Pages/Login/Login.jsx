@@ -62,14 +62,27 @@ const Login = () => {
         GoogleLogin()
             .then(result => {
                 const logUser = result.user;
-                navigate(from);
+                const saveUsers = {name: logUser.displayName,email:logUser.email}
 
-                Swal.fire({
-                    title: 'Login successful !!!',
-                    text: 'Do you want to continue',
-                    icon: 'success',
-                    confirmButtonText: 'Continue'
-                })
+                            fetch('https://summer-camp-server-rho-woad.vercel.app/users', {
+                                method: 'POST',
+                                headers: {
+                                    'content-type': 'application/json'
+                                },
+                                body: JSON.stringify(saveUsers)
+                            }).then(res => res.json())
+                                .then(data => {
+                                    if (data.insertedId) {
+                                        Swal.fire({
+                                            title: 'Login successful !!!',
+                                            text: 'Do you want to continue',
+                                            icon: 'success',
+                                            confirmButtonText: 'Continue'
+                                        })
+                                    }
+                                })
+                navigate(from);
+               
             })
             .catch(error => {
 

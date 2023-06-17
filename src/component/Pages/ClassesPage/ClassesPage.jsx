@@ -17,7 +17,7 @@ const ClassesPage = () => {
 
            const selectClass = {selectClassId: _id,class_name, image, instructor_name,available_seats,instructor_email, price,email: user.email}
 
-            fetch('http://localhost:5000/class', {
+            fetch('https://summer-camp-server-rho-woad.vercel.app/class', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
