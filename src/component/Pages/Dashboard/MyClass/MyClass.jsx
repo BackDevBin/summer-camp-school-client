@@ -77,7 +77,7 @@ const MyClass = () => {
                                             </div>
                                             <div>
                                                 <div className="font-semibold">{item?.class_name}</div>
-                                                <span className="badge badge-ghost badge-sm">Total Student: 50</span>
+                                                <span className="badge badge-ghost badge-sm">Total Seats: 50</span>
                                             </div>
                                         </div>
                                     </td>
