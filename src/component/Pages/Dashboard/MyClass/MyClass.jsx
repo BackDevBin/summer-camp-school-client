@@ -3,9 +3,47 @@ import SectionTitle from '../../../Shared/SectionTitle/SectionTitle';
 import useClass from '../../../../hook/useClass';
 import { Link } from 'react-router-dom';
 import { FaAmazonPay, FaTrashAlt } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const MyClass = () => {
-    const [userClass] = useClass();
+
+    const [userClass,refetch] = useClass();
+
+
+    const handleDeleteBtn = id => {
+
+        console.log(id);
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this class!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/class/${id}`, {
+                    method: 'DELETE',
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your class has been Removed.',
+                                'success'
+                            )
+
+                        }
+
+                    })
+            }
+        })
+
+    }
 
     return (
         <div>
@@ -56,8 +94,7 @@ const MyClass = () => {
 
                                     <th>
                                         <button className="btn btn-ghost bg-slate-50 text-black block m-1"><FaAmazonPay></FaAmazonPay></button>
-                                        {/* onClick={() => handleDeleteBtn(item._id)} */}
-                                        <button className="btn btn-ghost bg-red-700 text-white m-1"><FaTrashAlt></FaTrashAlt></button>
+                                        <button onClick={() => handleDeleteBtn(item._id)} className="btn btn-ghost bg-red-700 text-white m-1"><FaTrashAlt></FaTrashAlt></button>
                                     </th>
                                 </tr>)
                             }

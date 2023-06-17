@@ -1,4 +1,4 @@
-import { FaWallet } from "react-icons/fa";
+import { FaHome, FaLayerGroup, FaWallet } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
@@ -15,8 +15,10 @@ const Dashboard = () => {
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-56 h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
-                    <li><Link to="myclass">My Class</Link></li>
-                    <li><Link><FaWallet></FaWallet>Payment</Link></li>
+                    <li><Link to="/"><FaHome></FaHome> Home</Link></li>
+                    <li><Link to="myclass"><FaLayerGroup></FaLayerGroup> My Class</Link></li>
+                    <li><Link><FaLayerGroup></FaLayerGroup> My Enrolled Classes</Link></li>
+                    <li><Link><FaWallet></FaWallet>Payment History</Link></li>
                 </ul>
 
             </div>
