@@ -12,10 +12,10 @@ const ClassesPage = () => {
     let location = useLocation();
 
     const HandleSelectBtn = (items) => {
-        const { class_name, image, instructor_name, price,_id } = items;
+        const { class_name, image, instructor_name, price,_id, available_seats,instructor_email } = items;
         if (user && user.email) {
 
-           const selectClass = {selectClassId: _id,class_name, image, instructor_name, price,email: user.email}
+           const selectClass = {selectClassId: _id,class_name, image, instructor_name,available_seats,instructor_email, price,email: user.email}
 
             fetch('http://localhost:5000/class', {
                 method: 'POST',
